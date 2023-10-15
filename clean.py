@@ -49,7 +49,7 @@ def WinCleanVS():
 
 if __name__ == "__main__":
     system = platform.system()
-    projectName = "UntitledProject"
+    projectName = "Fractiz"
 
     if system == "Darwin":
         if os.path.exists("Makefile") or os.path.exists(".vscode/"):

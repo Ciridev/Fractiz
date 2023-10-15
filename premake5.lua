@@ -2,7 +2,12 @@ workspace "Fractiz"
     architecture "x64"
     configurations { "Debug", "Release" }
 
+    ExtLibs = {}
+    ExtLibs["GLFW"]  = "Build/Vendor/glfw/include"
+
     outDir = "%{cfg.buildcfg}_%{cfg.system}_%{cfg.architecture}"
+
+    include "Build/Vendor/glfw"
 
     project "Fractiz"
         location "Build"
@@ -12,13 +17,17 @@ workspace "Fractiz"
         objdir      ( "Binaries/Objects/" .. outDir .. "/%{prj.name}" )
 
         files { "Build/Source/**.c", "Build/Include/**.h" }
-        includedirs { "Build/Source", "Build/Include" }
+        includedirs { "Build/Source", "Build/Include", "%{ExtLibs.GLFW}" }
+
+        links { "GLFW" }
 
         filter "system:Windows"
             staticruntime "On"
             systemversion "latest"
             system "windows"
             defines { "FCT_WIN" }
+
+            links { "GLFW", "opengl32.lib" }
 
         filter "system:Macosx"
             system "macosx"

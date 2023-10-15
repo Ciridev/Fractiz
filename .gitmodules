@@ -1,0 +1,3 @@
+[submodule "Build/Vendor"]
+	path = Build/Vendor/glfw
+	url = https://github.com/Ciridev/glfw
